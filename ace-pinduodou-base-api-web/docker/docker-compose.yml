@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  ace-pinduodou-base-api-web:
+    image: ace-pinduodou-base-api-web:latest
+    container_name: ace-pinduodou-base-api-web
+    networks:
+      ace-network:
+        ipv4_address: ${ACE_REGISTRY_IP}
+    dns:
+      - ${ACE_DNS_IP}
+#    ports:
+#      - 8848:8848
+    restart: always # 如果容器内应用退出了，尝试重启
+
+networks:
+  ace-network:
+    ipam:
+      config:
+        - subnet: ${ACE_PROJECT_SUB_NETWORK}
