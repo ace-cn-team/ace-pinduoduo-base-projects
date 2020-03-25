@@ -55,7 +55,15 @@
             <groupId>org.ace</groupId>
             <artifactId>ace-fw-ms-discovery-server-autoconfigure</artifactId>
         </dependency>
-
+        <!-- pinduoduo-sdk start-->
+        <dependency>
+            <groupId>pop-sdk</groupId>
+            <artifactId>pop-sdk</artifactId>
+            <version>1.5.7</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/lib/pop-sdk-1.5.7-all.jar</systemPath>
+        </dependency>
+        <!-- pinduoduo-sdk end-->
     </dependencies>
 
     <build>
