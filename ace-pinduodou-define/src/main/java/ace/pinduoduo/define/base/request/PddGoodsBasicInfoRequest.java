@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class PddGoodsBasicDetailRequest{
+public class PddGoodsBasicInfoRequest {
 
     @ApiModelProperty(required=true, value="商品id")
     @Size(min=1, max=100)

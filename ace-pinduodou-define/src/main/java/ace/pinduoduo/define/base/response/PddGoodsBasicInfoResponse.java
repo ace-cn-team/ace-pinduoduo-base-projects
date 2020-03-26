@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PddGoodsBasicDetailResponse {
+public class PddGoodsBasicInfoResponse {
 
-    private List<PddGoodsBasicDetailResponse.GoodsBasicDetailResponseGoodsListItem>  goodsBasicDetailList;
+    private List<PddGoodsBasicInfoResponse.GoodsBasicDetailResponseGoodsListItem>  goodsBasicDetailList;
 
     @Data
     public static class GoodsBasicDetailResponseGoodsListItem {

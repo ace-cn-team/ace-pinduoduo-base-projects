@@ -1,6 +1,7 @@
 package ace.pinduoduo.base.api.web.application.controller;
 
 import ace.pinduoduo.base.api.controller.PddAdBaseController;
+import ace.pinduoduo.base.api.controller.PddOrdersBaseController;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class PddOrdersBaseControllerImpl
-        implements PddAdBaseController {
+        implements PddOrdersBaseController {
 
 
 }

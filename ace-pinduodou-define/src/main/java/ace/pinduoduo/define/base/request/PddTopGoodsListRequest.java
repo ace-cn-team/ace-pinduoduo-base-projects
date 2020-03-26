@@ -21,7 +21,7 @@ public class PddTopGoodsListRequest{
 
     @ApiModelProperty(required=false, value="请求数量；默认值:100")
     @Max(100)
-    private Integer limit;
+    private Integer limit = 10;
 
     @ApiModelProperty(required=false, value="翻页时建议填写前页返回的list_id值")
     private String listId;
