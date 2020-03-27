@@ -4,23 +4,11 @@ import ace.fw.copier.cglib.util.CachedBeanCopierUtils;
 import ace.fw.model.response.GenericResponseExt;
 import ace.fw.util.GenericResponseExtUtils;
 import ace.pinduoduo.base.api.controller.PddGoodsBaseController;
-import ace.pinduoduo.define.base.request.PddCouponInfoRequest;
-import ace.pinduoduo.define.base.request.PddGoodsBasicInfoRequest;
-import ace.pinduoduo.define.base.request.PddGoodsDetailRequest;
-import ace.pinduoduo.define.base.request.PddTopGoodsListRequest;
-import ace.pinduoduo.define.base.response.PddCouponInfoResponse;
-import ace.pinduoduo.define.base.response.PddGoodsBasicInfoResponse;
-import ace.pinduoduo.define.base.response.PddGoodsDetailResponse;
-import ace.pinduoduo.define.base.response.PddTopGoodsListResponse;
+import ace.pinduoduo.define.base.request.*;
+import ace.pinduoduo.define.base.response.*;
 import com.pdd.pop.sdk.http.PopClient;
-import com.pdd.pop.sdk.http.api.request.PddDdkCouponInfoQueryRequest;
-import com.pdd.pop.sdk.http.api.request.PddDdkGoodsBasicInfoGetRequest;
-import com.pdd.pop.sdk.http.api.request.PddDdkGoodsDetailRequest;
-import com.pdd.pop.sdk.http.api.request.PddDdkTopGoodsListQueryRequest;
-import com.pdd.pop.sdk.http.api.response.PddDdkCouponInfoQueryResponse;
-import com.pdd.pop.sdk.http.api.response.PddDdkGoodsBasicInfoGetResponse;
-import com.pdd.pop.sdk.http.api.response.PddDdkGoodsDetailResponse;
-import com.pdd.pop.sdk.http.api.response.PddDdkTopGoodsListQueryResponse;
+import com.pdd.pop.sdk.http.api.request.*;
+import com.pdd.pop.sdk.http.api.response.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +31,7 @@ public class PddGoodsBaseControllerImpl
 
     @Override
     public GenericResponseExt<PddTopGoodsListResponse> findTopGoodsList(@Valid PddTopGoodsListRequest request) {
-        PddTopGoodsListResponse pddTopGoodsListResponse = new PddTopGoodsListResponse();
+        PddTopGoodsListResponse pddTopGoodsListResponse = null;
 
         try{
             PddDdkTopGoodsListQueryRequest pddDdkTopGoodsListQueryRequest = CachedBeanCopierUtils.copy(request, PddDdkTopGoodsListQueryRequest.class);
@@ -53,6 +41,7 @@ public class PddGoodsBaseControllerImpl
             if(topGoodsListGetResponse != null){
                 List<PddDdkTopGoodsListQueryResponse.TopGoodsListGetResponseListItem> topGoodsListGetResponseListItemList = topGoodsListGetResponse.getList();
                 List<PddTopGoodsListResponse.TopGoodsListGetResponseListItem> topGoodsListGetResponseListItems = CachedBeanCopierUtils.copyList(topGoodsListGetResponseListItemList, PddTopGoodsListResponse.TopGoodsListGetResponseListItem.class);
+                pddTopGoodsListResponse = new PddTopGoodsListResponse();
                 pddTopGoodsListResponse.setList(topGoodsListGetResponseListItems);
                 pddTopGoodsListResponse.setListId(topGoodsListGetResponse.getListId());
                 pddTopGoodsListResponse.setSearchId(topGoodsListGetResponse.getSearchId());
@@ -67,7 +56,7 @@ public class PddGoodsBaseControllerImpl
 
     @Override
     public GenericResponseExt<PddGoodsBasicInfoResponse> findGoodsBasicInfo(@Valid PddGoodsBasicInfoRequest request) {
-        PddGoodsBasicInfoResponse pddGoodsBasicInfoResponse = new PddGoodsBasicInfoResponse();
+        PddGoodsBasicInfoResponse pddGoodsBasicInfoResponse = null;
 
         try {
             //获取拼多多商品信息
@@ -79,6 +68,7 @@ public class PddGoodsBaseControllerImpl
             if(goodsBasicDetailResponse != null){
                 List<PddDdkGoodsBasicInfoGetResponse.GoodsBasicDetailResponseGoodsListItem> goodsList = goodsBasicDetailResponse.getGoodsList();
                 List<PddGoodsBasicInfoResponse.GoodsBasicDetailResponseGoodsListItem> resultList = CachedBeanCopierUtils.copyList(goodsList, PddGoodsBasicInfoResponse.GoodsBasicDetailResponseGoodsListItem.class);
+                pddGoodsBasicInfoResponse = new PddGoodsBasicInfoResponse();
                 pddGoodsBasicInfoResponse.setGoodsBasicDetailList(resultList);
             }
             return GenericResponseExtUtils.buildSuccessWithData(pddGoodsBasicInfoResponse);
@@ -90,7 +80,7 @@ public class PddGoodsBaseControllerImpl
 
     @Override
     public GenericResponseExt<PddGoodsDetailResponse> findGoodsDetail(@Valid PddGoodsDetailRequest request) {
-        PddGoodsDetailResponse pddGoodsDetailResponse = new PddGoodsDetailResponse();
+        PddGoodsDetailResponse pddGoodsDetailResponse = null;
 
         try{
             PddDdkGoodsDetailRequest pddDdkGoodsDetailRequest = CachedBeanCopierUtils.copy(request, PddDdkGoodsDetailRequest.class);
@@ -100,6 +90,7 @@ public class PddGoodsBaseControllerImpl
             if(goodsDetailResponse != null){
                 List<PddDdkGoodsDetailResponse.GoodsDetailResponseGoodsDetailsItem> goodsDetails = goodsDetailResponse.getGoodsDetails();
                 List<PddGoodsDetailResponse.GoodsDetailResponseGoodsDetailsItem> goodsDetailResponseGoodsDetailsItemList = CachedBeanCopierUtils.copyList(goodsDetails, PddGoodsDetailResponse.GoodsDetailResponseGoodsDetailsItem.class);
+                pddGoodsDetailResponse = new PddGoodsDetailResponse();
                 pddGoodsDetailResponse.setGoodsDetails(goodsDetailResponseGoodsDetailsItemList);
             }
             return GenericResponseExtUtils.buildSuccessWithData(pddGoodsDetailResponse);
@@ -111,7 +102,7 @@ public class PddGoodsBaseControllerImpl
 
     @Override
     public GenericResponseExt<PddCouponInfoResponse> findCouponDetail(@Valid PddCouponInfoRequest request) {
-        PddCouponInfoResponse pddCouponInfoResponse = new PddCouponInfoResponse();
+        PddCouponInfoResponse pddCouponInfoResponse = null;
         try{
             PddDdkCouponInfoQueryRequest pddDdkCouponInfoQueryRequest = CachedBeanCopierUtils.copy(request, PddDdkCouponInfoQueryRequest.class);
             PddDdkCouponInfoQueryResponse pddDdkCouponInfoQueryResponse = popClient.syncInvoke(pddDdkCouponInfoQueryRequest);
@@ -120,12 +111,48 @@ public class PddGoodsBaseControllerImpl
             if(ddkCouponInfoQueryResponse != null){
                 List<PddDdkCouponInfoQueryResponse.DdkCouponInfoQueryResponseListItem> ddkCouponInfoQueryResponseListItemList = ddkCouponInfoQueryResponse.getList();
                 List<PddCouponInfoResponse.CouponInfoResponseItemList> couponInfoResponseItemListList = CachedBeanCopierUtils.copyList(ddkCouponInfoQueryResponseListItemList, PddCouponInfoResponse.CouponInfoResponseItemList.class);
+                pddCouponInfoResponse = new PddCouponInfoResponse();
                 pddCouponInfoResponse.setCouponInfoResponseItemListList(couponInfoResponseItemListList);
             }
             return GenericResponseExtUtils.buildSuccessWithData(pddCouponInfoResponse);
         }catch (Exception e){
             log.error("查询优惠券信息异常,请求:[{}],异常:[{}]", request.toString(), e);
             return GenericResponseExtUtils.buildFailureWithData(pddCouponInfoResponse);
+        }
+    }
+
+    @Override
+    public GenericResponseExt<PddGoodsSearchResponse> searchGoods(@Valid PddGoodsSearchRequest request) {
+        PddGoodsSearchResponse pddGoodsSearchResponse = null;
+        try{
+            PddDdkGoodsSearchRequest pddDdkGoodsSearchRequest = CachedBeanCopierUtils.copy(request, PddDdkGoodsSearchRequest.class);
+            PddDdkGoodsSearchResponse pddDdkGoodsSearchResponse = popClient.syncInvoke(pddDdkGoodsSearchRequest);
+            PddDdkGoodsSearchResponse.GoodsSearchResponse goodsSearchResponse = pddDdkGoodsSearchResponse.getGoodsSearchResponse();
+            if(goodsSearchResponse != null){
+                pddGoodsSearchResponse = CachedBeanCopierUtils.copy(goodsSearchResponse, PddGoodsSearchResponse.class);
+            }
+            return GenericResponseExtUtils.buildSuccessWithData(pddGoodsSearchResponse);
+        }catch (Exception e){
+            log.error("商品查询异常,请求:[{}],异常:[{}]", request.toString(), e);
+            return GenericResponseExtUtils.buildFailureWithData(pddGoodsSearchResponse);
+        }
+    }
+
+    @Override
+    public GenericResponseExt<PddGoodsUnitQueryResponse> findGoodsUnit(@Valid PddGoodsUnitQueryRequest request) {
+        PddGoodsUnitQueryResponse response = null;
+        try{
+            PddDdkGoodsUnitQueryRequest pddDdkGoodsUnitQueryRequest = CachedBeanCopierUtils.copy(request, PddDdkGoodsUnitQueryRequest.class);
+            PddDdkGoodsUnitQueryResponse pddDdkGoodsUnitQueryResponse = popClient.syncInvoke(pddDdkGoodsUnitQueryRequest);
+            PddDdkGoodsUnitQueryResponse.DdkGoodsUnitQueryResponse ddkGoodsUnitQueryResponse = pddDdkGoodsUnitQueryResponse.getDdkGoodsUnitQueryResponse();
+
+            if(ddkGoodsUnitQueryResponse != null){
+                response = CachedBeanCopierUtils.copy(ddkGoodsUnitQueryResponse, PddGoodsUnitQueryResponse.class);
+            }
+            return GenericResponseExtUtils.buildSuccessWithData(response);
+        }catch (Exception e){
+            log.error("查询商品的推广计划异常,请求:[{}],异常:[{}]", request.toString(), e);
+            return GenericResponseExtUtils.buildFailureWithData(response);
         }
     }
 }

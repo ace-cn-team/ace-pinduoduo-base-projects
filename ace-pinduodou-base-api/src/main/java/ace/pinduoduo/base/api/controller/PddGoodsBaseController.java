@@ -2,14 +2,8 @@ package ace.pinduoduo.base.api.controller;
 
 import ace.fw.model.response.GenericResponseExt;
 import ace.pinduoduo.base.api.service.PddGoodsBaseService;
-import ace.pinduoduo.define.base.request.PddCouponInfoRequest;
-import ace.pinduoduo.define.base.request.PddGoodsBasicInfoRequest;
-import ace.pinduoduo.define.base.request.PddGoodsDetailRequest;
-import ace.pinduoduo.define.base.request.PddTopGoodsListRequest;
-import ace.pinduoduo.define.base.response.PddCouponInfoResponse;
-import ace.pinduoduo.define.base.response.PddGoodsBasicInfoResponse;
-import ace.pinduoduo.define.base.response.PddGoodsDetailResponse;
-import ace.pinduoduo.define.base.response.PddTopGoodsListResponse;
+import ace.pinduoduo.define.base.request.*;
+import ace.pinduoduo.define.base.response.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,5 +38,13 @@ public interface PddGoodsBaseController extends PddGoodsBaseService {
     @ApiOperation(value = "查询优惠券信息")
     @RequestMapping(path = "/find-coupon-detail", method = RequestMethod.POST)
     GenericResponseExt<PddCouponInfoResponse> findCouponDetail(@Valid @RequestBody PddCouponInfoRequest request);
+
+    @ApiOperation(value = "商品查询")
+    @RequestMapping(path = "/search-goods", method = RequestMethod.POST)
+    GenericResponseExt<PddGoodsSearchResponse> searchGoods(@Valid @RequestBody PddGoodsSearchRequest request);
+
+    @ApiOperation(value = "查询商品的推广计划")
+    @RequestMapping(path = "/find-goods-unit", method = RequestMethod.POST)
+    GenericResponseExt<PddGoodsUnitQueryResponse> findGoodsUnit(@Valid @RequestBody PddGoodsUnitQueryRequest request);
 
 }
