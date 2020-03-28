@@ -1,50 +1,40 @@
 package ace.pinduoduo.define.base.response;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@ApiModel
 public class PddCouponInfoResponse {
 
     private List<CouponInfoResponseItemList> couponInfoResponseItemListList;
 
     @Data
+    @ApiModel
     public static class CouponInfoResponseItemList {
 
-        /**
-         * 优惠券结束时间
-         */
+        @ApiModelProperty(value = "优惠券结束时间")
         private Long couponEndTime;
 
-        /**
-         * 优惠券id
-         */
+        @ApiModelProperty(value = "优惠券id")
         private String couponId;
 
-        /**
-         * 优惠券开始时间
-         */
+        @ApiModelProperty(value = "优惠券开始时间")
         private Long couponStartTime;
 
-        /**
-         * 优惠券类型
-         */
+        @ApiModelProperty(value = "优惠券类型")
         private Integer couponType;
 
-        /**
-         * 优惠券面额 单位：厘
-         */
+        @ApiModelProperty(value = "优惠券面额 单位：厘")
         private Long discount;
 
-        /**
-         * 优惠券总量
-         */
+        @ApiModelProperty(value = "优惠券总量")
         private Long initQuantity;
 
-        /**
-         * 优惠券剩余数量
-         */
+        @ApiModelProperty(value = "优惠券剩余数量")
         private Long remainQuantity;
 
     }

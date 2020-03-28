@@ -47,4 +47,12 @@ public interface PddGoodsBaseController extends PddGoodsBaseService {
     @RequestMapping(path = "/find-goods-unit", method = RequestMethod.POST)
     GenericResponseExt<PddGoodsUnitQueryResponse> findGoodsUnit(@Valid @RequestBody PddGoodsUnitQueryRequest request);
 
+    @ApiOperation(value = "主题列表查询")
+    @RequestMapping(path = "/find-theme-list", method = RequestMethod.POST)
+    GenericResponseExt<PddThemeListResponse> findThemeList(@Valid @RequestBody PddThemeListRequest request);
+
+    @ApiOperation(value = "主题商品查询")
+    @RequestMapping(path = "/find-theme-goods", method = RequestMethod.POST)
+    GenericResponseExt<PddThemeGoodsSearchResponse> findThemeGoods(@Valid @RequestBody PddThemeGoodsSearchRequest request);
+
 }

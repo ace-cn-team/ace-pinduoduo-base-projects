@@ -1,8 +1,10 @@
 package ace.pinduoduo.define.base.response;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 @Data
+@ApiModel
 public class PddGoodsUnitQueryResponse {
         /**
          * 优惠券结束时间，单位：秒

@@ -1,10 +1,12 @@
 package ace.pinduoduo.define.base.response;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@ApiModel
 public class PddTopGoodsListResponse {
 
     private List<PddTopGoodsListResponse.TopGoodsListGetResponseListItem> list;

@@ -155,4 +155,47 @@ public class PddGoodsBaseControllerImpl
             return GenericResponseExtUtils.buildFailureWithData(response);
         }
     }
+
+    @Override
+    public GenericResponseExt<PddThemeListResponse> findThemeList(@Valid PddThemeListRequest request) {
+        PddThemeListResponse pddThemeListResponse = null;
+        try{
+            PddDdkThemeListGetRequest pddDdkThemeListGetRequest = new PddDdkThemeListGetRequest();
+            pddDdkThemeListGetRequest.setPageSize(request.getPageSize());
+            pddDdkThemeListGetRequest.setPage(request.getPage());
+            PddDdkThemeListGetResponse response = popClient.syncInvoke(pddDdkThemeListGetRequest);
+            PddDdkThemeListGetResponse.ThemeListGetResponse themeListGetResponse = response.getThemeListGetResponse();
+
+            if(themeListGetResponse != null){
+                List<PddDdkThemeListGetResponse.ThemeListGetResponseThemeListItem> themeList = themeListGetResponse.getThemeList();
+                List<PddThemeListResponse.ThemeListGetResponseThemeItemList> themeListGetResponseThemeItemLists = CachedBeanCopierUtils.copyList(themeList, PddThemeListResponse.ThemeListGetResponseThemeItemList.class);
+                pddThemeListResponse = new PddThemeListResponse();
+                pddThemeListResponse.setTotal(themeListGetResponse.getTotal());
+                pddThemeListResponse.setThemeListGetResponseThemeItemListList(themeListGetResponseThemeItemLists);
+            }
+            return GenericResponseExtUtils.buildSuccessWithData(pddThemeListResponse);
+        }catch (Exception e){
+            log.error("主题列表查询异常,请求:[{}],异常:[{}]", request.toString(), e);
+            return GenericResponseExtUtils.buildFailureWithData(pddThemeListResponse);
+        }
+    }
+
+    @Override
+    public GenericResponseExt<PddThemeGoodsSearchResponse> findThemeGoods(@Valid PddThemeGoodsSearchRequest request) {
+        PddThemeGoodsSearchResponse pddThemeGoodsSearchResponse = null;
+        try{
+            PddDdkThemeGoodsSearchRequest pddDdkThemeGoodsSearchRequest = new PddDdkThemeGoodsSearchRequest();
+            pddDdkThemeGoodsSearchRequest.setThemeId(request.getThemeId());
+            PddDdkThemeGoodsSearchResponse pddDdkThemeGoodsSearchResponse = popClient.syncInvoke(pddDdkThemeGoodsSearchRequest);
+            PddDdkThemeGoodsSearchResponse.ThemeListGetResponse themeListGetResponse = pddDdkThemeGoodsSearchResponse.getThemeListGetResponse();
+
+            if(themeListGetResponse != null){
+                pddThemeGoodsSearchResponse = CachedBeanCopierUtils.copy(themeListGetResponse, PddThemeGoodsSearchResponse.class);
+            }
+            return GenericResponseExtUtils.buildSuccessWithData(pddThemeGoodsSearchResponse);
+        }catch (Exception e){
+            log.error("主题商品查询异常,请求:[{}],异常:[{}]", request.toString(), e);
+            return GenericResponseExtUtils.buildFailureWithData(pddThemeGoodsSearchResponse);
+        }
+    }
 }

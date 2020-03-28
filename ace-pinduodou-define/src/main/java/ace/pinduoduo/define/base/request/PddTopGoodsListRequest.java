@@ -1,29 +1,29 @@
 package ace.pinduoduo.define.base.request;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Data
+@ApiModel
 public class PddTopGoodsListRequest{
 
-    @ApiModelProperty(required=false, value="推广位id")
+    @ApiModelProperty(value="推广位id")
     private String pId;
 
-    @ApiModelProperty(required=false, value="从多少位置开始请求；默认值:0，offset需是limit的整数倍，仅支持整页翻页")
-    private Integer offset;
+    @ApiModelProperty(value="从多少位置开始请求；默认值:0，offset需是limit的整数倍，仅支持整页翻页")
+    private Integer offset = 0;
 
-    @ApiModelProperty(required=false, value="1-实时热销榜；2-实时收益榜")
-    @Range(min=1, max=2)
+    @ApiModelProperty(value="1-实时热销榜；2-实时收益榜")
     private Integer sortType;
 
-    @ApiModelProperty(required=false, value="请求数量；默认值:100")
-    @Max(100)
+    @ApiModelProperty(value="请求数量；默认值:10,最大100")
     private Integer limit = 10;
 
-    @ApiModelProperty(required=false, value="翻页时建议填写前页返回的list_id值")
+    @ApiModelProperty(value="翻页时建议填写前页返回的list_id值")
     private String listId;
 
 }

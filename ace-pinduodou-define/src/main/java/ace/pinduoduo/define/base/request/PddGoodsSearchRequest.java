@@ -1,5 +1,6 @@
 package ace.pinduoduo.define.base.request;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
@@ -7,6 +8,7 @@ import org.hibernate.validator.constraints.Range;
 import java.util.List;
 
 @Data
+@ApiModel
 public class PddGoodsSearchRequest {
 
     @ApiModelProperty(value = "商品关键词，与opt_id字段选填一个或全部填写")
@@ -15,7 +17,7 @@ public class PddGoodsSearchRequest {
     @ApiModelProperty(value = "商品标签类目ID，使用pdd.goods.opt.get获取")
     private Long optId;
 
-    @ApiModelProperty(value = "默认值1，商品分页数")
+    @ApiModelProperty(value = "默认值1，商品页数")
     private Integer page = 1;
 
     @ApiModelProperty(value = "默认10，每页商品数量")
