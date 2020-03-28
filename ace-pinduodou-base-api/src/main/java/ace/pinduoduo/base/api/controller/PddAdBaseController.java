@@ -2,8 +2,12 @@ package ace.pinduoduo.base.api.controller;
 
 import ace.fw.model.response.GenericResponseExt;
 import ace.pinduoduo.base.api.service.PddAdBaseService;
+import ace.pinduoduo.define.base.request.PddGoodsPidQueryRequest;
+import ace.pinduoduo.define.base.request.PddGoodsPromotionUrlGenerateRequest;
 import ace.pinduoduo.define.base.request.PddPIdGenerateRequest;
 import ace.pinduoduo.define.base.request.PddWeappQrcodeUrlGenRequest;
+import ace.pinduoduo.define.base.response.PddGoodsPidQueryResponse;
+import ace.pinduoduo.define.base.response.PddGoodsPromotionUrlGenerateResponse;
 import ace.pinduoduo.define.base.response.PddPIdGenerateResponse;
 import ace.pinduoduo.define.base.response.PddWeappQrcodeUrlGenResponse;
 import io.swagger.annotations.ApiOperation;
@@ -32,4 +36,12 @@ public interface PddAdBaseController extends PddAdBaseService {
     @ApiOperation(value = "创建多多进宝推广位")
     @RequestMapping(path = "/create-pid", method = RequestMethod.POST)
     GenericResponseExt<PddPIdGenerateResponse> createPId(@Valid @RequestBody PddPIdGenerateRequest request);
+
+    @ApiOperation(value = "创建多多进宝推广位")
+    @RequestMapping(path = "/query-pid", method = RequestMethod.POST)
+    GenericResponseExt<PddGoodsPidQueryResponse> queryPId(@Valid @RequestBody PddGoodsPidQueryRequest request);
+
+    @ApiOperation(value = "推广链接生成")
+    @RequestMapping(path = "/promotion-url-generate", method = RequestMethod.POST)
+    GenericResponseExt<PddGoodsPromotionUrlGenerateResponse> promotionUrlGenerate(@Valid @RequestBody PddGoodsPromotionUrlGenerateRequest request);
 }
