@@ -24,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface ClientTagBaseService {
     String MODULE_RESTFUL_NAME = "client-tag-base";
 
+    /**
+     * 是否client tag
+     * @return
+     */
     @ApiOperation(value = "是否client tag")
     @RequestMapping(path = "/check", method = RequestMethod.POST)
     default GenericResponseExt<String> check() {

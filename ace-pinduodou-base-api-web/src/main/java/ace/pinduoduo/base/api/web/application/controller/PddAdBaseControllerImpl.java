@@ -6,11 +6,11 @@ import ace.fw.util.GenericResponseExtUtils;
 import ace.pinduoduo.base.api.controller.PddAdBaseController;
 import ace.pinduoduo.define.base.request.PddGoodsPidQueryRequest;
 import ace.pinduoduo.define.base.request.PddGoodsPromotionUrlGenerateRequest;
-import ace.pinduoduo.define.base.request.PddPIdGenerateRequest;
+import ace.pinduoduo.define.base.request.PddPidGenerateRequest;
 import ace.pinduoduo.define.base.request.PddWeappQrcodeUrlGenRequest;
 import ace.pinduoduo.define.base.response.PddGoodsPidQueryResponse;
 import ace.pinduoduo.define.base.response.PddGoodsPromotionUrlGenerateResponse;
-import ace.pinduoduo.define.base.response.PddPIdGenerateResponse;
+import ace.pinduoduo.define.base.response.PddPidGenerateResponse;
 import ace.pinduoduo.define.base.response.PddWeappQrcodeUrlGenResponse;
 import com.pdd.pop.sdk.http.PopClient;
 import com.pdd.pop.sdk.http.api.request.PddDdkGoodsPidGenerateRequest;
@@ -60,8 +60,8 @@ public class PddAdBaseControllerImpl
     }
 
     @Override
-    public GenericResponseExt<PddPIdGenerateResponse> createPId(@Valid PddPIdGenerateRequest request) {
-        PddPIdGenerateResponse pddPIdGenerateResponse = new PddPIdGenerateResponse();
+    public GenericResponseExt<PddPidGenerateResponse> createPid(@Valid PddPidGenerateRequest request) {
+        PddPidGenerateResponse pddPidGenerateResponse = new PddPidGenerateResponse();
         try{
             PddDdkGoodsPidGenerateRequest pddDdkGoodsPidGenerateRequest = new PddDdkGoodsPidGenerateRequest();
             pddDdkGoodsPidGenerateRequest.setNumber(request.getNumber());
@@ -71,18 +71,18 @@ public class PddAdBaseControllerImpl
 
             if(pIdGenerateResponse != null){
                 List<PddDdkGoodsPidGenerateResponse.PIdGenerateResponsePIdListItem> pIdList = pIdGenerateResponse.getPIdList();
-                List<PddPIdGenerateResponse.PIdGenerateItemResponse> pIdGenerateItemResponses = CachedBeanCopierUtils.copyList(pIdList, PddPIdGenerateResponse.PIdGenerateItemResponse.class);
-                pddPIdGenerateResponse.setPIdGenerateItemResponseList(pIdGenerateItemResponses);
+                List<PddPidGenerateResponse.PidGenerateItemResponse> pidGenerateItemResponses = CachedBeanCopierUtils.copyList(pIdList, PddPidGenerateResponse.PidGenerateItemResponse.class);
+                pddPidGenerateResponse.setPIdGenerateItemResponseList(pidGenerateItemResponses);
             }
-            return GenericResponseExtUtils.buildSuccessWithData(pddPIdGenerateResponse);
+            return GenericResponseExtUtils.buildSuccessWithData(pddPidGenerateResponse);
         }catch (Exception e){
             log.error("创建推广位异常,请求:[{}],异常:[{}]", request.toString(), e);
-            return GenericResponseExtUtils.buildFailureWithData(pddPIdGenerateResponse);
+            return GenericResponseExtUtils.buildFailureWithData(pddPidGenerateResponse);
         }
     }
 
     @Override
-    public GenericResponseExt<PddGoodsPidQueryResponse> queryPId(@Valid PddGoodsPidQueryRequest request) {
+    public GenericResponseExt<PddGoodsPidQueryResponse> queryPid(@Valid PddGoodsPidQueryRequest request) {
         PddGoodsPidQueryResponse pddGoodsPidQueryResponse = null;
         try{
             PddDdkGoodsPidQueryRequest pddDdkGoodsPidQueryRequest = new PddDdkGoodsPidQueryRequest();

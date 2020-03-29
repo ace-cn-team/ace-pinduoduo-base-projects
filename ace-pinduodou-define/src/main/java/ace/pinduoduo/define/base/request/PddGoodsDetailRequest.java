@@ -8,6 +8,10 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+/**
+ * @author qjj
+ * @create 2020/3/29 17:20
+ */
 @Data
 @ApiModel
 public class PddGoodsDetailRequest {

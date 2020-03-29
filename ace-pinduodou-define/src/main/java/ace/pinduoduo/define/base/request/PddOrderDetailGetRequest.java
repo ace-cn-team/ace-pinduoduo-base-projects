@@ -6,6 +6,10 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * @author qjj
+ * @create 2020/3/29 17:20
+ */
 @Data
 @ApiModel
 public class PddOrderDetailGetRequest {

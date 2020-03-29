@@ -6,6 +6,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author qjj
+ * @create 2020/3/29 17:20
+ */
 @Data
 @ApiModel
 public class PddGoodsDetailResponse {

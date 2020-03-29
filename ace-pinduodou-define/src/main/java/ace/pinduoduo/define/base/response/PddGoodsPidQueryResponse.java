@@ -6,19 +6,23 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author qjj
+ * @create 2020/3/29 17:20
+ */
 @Data
 @ApiModel
 public class PddGoodsPidQueryResponse {
 
     @ApiModelProperty(value = "多多进宝推广位对象列表")
-    private List<PIdQueryResponsePIdItemList> pIdList;
+    private List<PidQueryResponsePidItemList> pIdList;
 
     @ApiModelProperty(value = "返回推广位总数")
     private Long totalCount;
 
     @Data
     @ApiModel
-    public static class PIdQueryResponsePIdItemList {
+    public static class PidQueryResponsePidItemList {
 
         @ApiModelProperty(value = "推广位生成时间")
         private Long createTime;

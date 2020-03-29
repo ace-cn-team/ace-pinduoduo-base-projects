@@ -5,15 +5,19 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author qjj
+ * @create 2020/3/29 17:20
+ */
 @Data
 @ApiModel
-public class PddPIdGenerateResponse {
+public class PddPidGenerateResponse {
 
-    private List<PIdGenerateItemResponse> pIdGenerateItemResponseList;
+    private List<PidGenerateItemResponse> pIdGenerateItemResponseList;
 
     @Data
     @ApiModel
-    public static class PIdGenerateItemResponse {
+    public static class PidGenerateItemResponse {
 
         /**
          * 推广位创建时间

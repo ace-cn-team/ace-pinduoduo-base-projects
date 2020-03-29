@@ -26,10 +26,20 @@ import javax.validation.Valid;
 @Validated
 public interface PddOrdersBaseController extends PddGoodsBaseService {
 
+    /**
+     * 最后更新时间段增量同步推广订单信息
+     * @param request
+     * @return
+     */
     @ApiOperation(value = "最后更新时间段增量同步推广订单信息")
     @RequestMapping(path = "/find-order-list", method = RequestMethod.POST)
     GenericResponseExt<PddOrderListIncrementGetResponse> findOrderList(@Valid @RequestBody PddOrderListIncrementGetRequest request);
 
+    /**
+     * 查询订单详情
+     * @param request
+     * @return
+     */
     @ApiOperation(value = "查询订单详情")
     @RequestMapping(path = "/find-order-detail", method = RequestMethod.POST)
     GenericResponseExt<PddOrderDetailGetResponse> findOrderDetail(@Valid @RequestBody PddOrderDetailGetRequest request);

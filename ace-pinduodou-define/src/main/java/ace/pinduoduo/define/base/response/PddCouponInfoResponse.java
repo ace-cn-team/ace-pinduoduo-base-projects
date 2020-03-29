@@ -6,6 +6,11 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author qjj
+ * @create 2020/3/29 17:20
+ * @description 优惠券信息
+ */
 @Data
 @ApiModel
 public class PddCouponInfoResponse {
