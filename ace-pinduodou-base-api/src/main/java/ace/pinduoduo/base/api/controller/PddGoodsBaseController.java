@@ -95,4 +95,13 @@ public interface PddGoodsBaseController extends PddGoodsBaseService {
     @RequestMapping(path = "/find-theme-goods", method = RequestMethod.POST)
     GenericResponseExt<PddThemeGoodsSearchResponse> findThemeGoods(@Valid @RequestBody PddThemeGoodsSearchRequest request);
 
+    /**
+     * 运营频道商品查询
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "运营频道商品查询")
+    @RequestMapping(path = "/find-recommend-goods", method = RequestMethod.POST)
+    GenericResponseExt<PddGoodsRecommendGetResponse> findRecommendGoods(@Valid @RequestBody PddGoodsRecommendGetRequest request);
+
 }

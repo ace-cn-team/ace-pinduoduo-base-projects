@@ -4,23 +4,11 @@ import ace.fw.copier.cglib.util.CachedBeanCopierUtils;
 import ace.fw.model.response.GenericResponseExt;
 import ace.fw.util.GenericResponseExtUtils;
 import ace.pinduoduo.base.api.controller.PddAdBaseController;
-import ace.pinduoduo.define.base.request.PddGoodsPidQueryRequest;
-import ace.pinduoduo.define.base.request.PddGoodsPromotionUrlGenerateRequest;
-import ace.pinduoduo.define.base.request.PddPidGenerateRequest;
-import ace.pinduoduo.define.base.request.PddWeappQrcodeUrlGenRequest;
-import ace.pinduoduo.define.base.response.PddGoodsPidQueryResponse;
-import ace.pinduoduo.define.base.response.PddGoodsPromotionUrlGenerateResponse;
-import ace.pinduoduo.define.base.response.PddPidGenerateResponse;
-import ace.pinduoduo.define.base.response.PddWeappQrcodeUrlGenResponse;
+import ace.pinduoduo.define.base.request.*;
+import ace.pinduoduo.define.base.response.*;
 import com.pdd.pop.sdk.http.PopClient;
-import com.pdd.pop.sdk.http.api.request.PddDdkGoodsPidGenerateRequest;
-import com.pdd.pop.sdk.http.api.request.PddDdkGoodsPidQueryRequest;
-import com.pdd.pop.sdk.http.api.request.PddDdkGoodsPromotionUrlGenerateRequest;
-import com.pdd.pop.sdk.http.api.request.PddDdkWeappQrcodeUrlGenRequest;
-import com.pdd.pop.sdk.http.api.response.PddDdkGoodsPidGenerateResponse;
-import com.pdd.pop.sdk.http.api.response.PddDdkGoodsPidQueryResponse;
-import com.pdd.pop.sdk.http.api.response.PddDdkGoodsPromotionUrlGenerateResponse;
-import com.pdd.pop.sdk.http.api.response.PddDdkWeappQrcodeUrlGenResponse;
+import com.pdd.pop.sdk.http.api.request.*;
+import com.pdd.pop.sdk.http.api.response.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -117,6 +105,24 @@ public class PddAdBaseControllerImpl
         }catch (Exception e){
             log.error("推广链接生成异常,请求:[{}],异常:[{}]", request.toString(), e);
             return GenericResponseExtUtils.buildFailureWithData(pddGoodsPromotionUrlGenerateResponse);
+        }
+    }
+
+    @Override
+    public GenericResponseExt<PddResourceUrlGenResponse> resourceUrlGen(@Valid PddResourceUrlGenRequest request) {
+        PddResourceUrlGenResponse pddResourceUrlGenResponse = null;
+        try{
+            PddDdkResourceUrlGenRequest pddDdkResourceUrlGenRequest = CachedBeanCopierUtils.copy(request, PddDdkResourceUrlGenRequest.class);
+            PddDdkResourceUrlGenResponse pddDdkResourceUrlGenResponse = popClient.syncInvoke(pddDdkResourceUrlGenRequest);
+            PddDdkResourceUrlGenResponse.ResourceUrlResponse resourceUrlResponse = pddDdkResourceUrlGenResponse.getResourceUrlResponse();
+
+            if(resourceUrlResponse != null){
+                pddResourceUrlGenResponse = CachedBeanCopierUtils.copy(resourceUrlResponse, PddResourceUrlGenResponse.class);
+            }
+            return GenericResponseExtUtils.buildSuccessWithData(pddResourceUrlGenResponse);
+        }catch (Exception e){
+            log.error("生成频道推广异常,请求:[{}],异常:[{}]", request.toString(), e);
+            return GenericResponseExtUtils.buildFailureWithData(pddResourceUrlGenResponse);
         }
     }
 }

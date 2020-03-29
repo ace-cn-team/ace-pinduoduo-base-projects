@@ -24,7 +24,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(path = "/" + PddOrdersBaseService.MODULE_RESTFUL_NAME)
 @Validated
-public interface PddOrdersBaseController extends PddGoodsBaseService {
+public interface PddOrdersBaseController extends PddOrdersBaseService {
 
     /**
      * 最后更新时间段增量同步推广订单信息

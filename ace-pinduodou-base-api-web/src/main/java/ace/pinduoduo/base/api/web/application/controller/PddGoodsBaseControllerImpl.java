@@ -198,4 +198,23 @@ public class PddGoodsBaseControllerImpl
             return GenericResponseExtUtils.buildFailureWithData(pddThemeGoodsSearchResponse);
         }
     }
+
+    @Override
+    public GenericResponseExt<PddGoodsRecommendGetResponse> findRecommendGoods(@Valid PddGoodsRecommendGetRequest request) {
+        PddGoodsRecommendGetResponse pddGoodsRecommendGetResponse = null;
+        try{
+            PddDdkGoodsRecommendGetRequest pddDdkGoodsRecommendGetRequest = CachedBeanCopierUtils.copy(request, PddDdkGoodsRecommendGetRequest.class);
+            PddDdkGoodsRecommendGetResponse pddDdkGoodsRecommendGetResponse = popClient.syncInvoke(pddDdkGoodsRecommendGetRequest);
+            PddDdkGoodsRecommendGetResponse.GoodsBasicDetailResponse goodsBasicDetailResponse = pddDdkGoodsRecommendGetResponse.getGoodsBasicDetailResponse();
+
+            if(goodsBasicDetailResponse != null){
+                pddGoodsRecommendGetResponse = CachedBeanCopierUtils.copy(goodsBasicDetailResponse, PddGoodsRecommendGetResponse.class);
+            }
+            return GenericResponseExtUtils.buildSuccessWithData(pddGoodsRecommendGetResponse);
+        }catch (Exception e){
+            log.error("运营频道商品查询异常,请求:[{}],异常:[{}]", request.toString(), e);
+            return GenericResponseExtUtils.buildFailureWithData(pddGoodsRecommendGetResponse);
+        }
+    }
+
 }

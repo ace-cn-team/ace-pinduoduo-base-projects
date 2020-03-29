@@ -2,14 +2,8 @@ package ace.pinduoduo.base.api.controller;
 
 import ace.fw.model.response.GenericResponseExt;
 import ace.pinduoduo.base.api.service.PddAdBaseService;
-import ace.pinduoduo.define.base.request.PddGoodsPidQueryRequest;
-import ace.pinduoduo.define.base.request.PddGoodsPromotionUrlGenerateRequest;
-import ace.pinduoduo.define.base.request.PddPidGenerateRequest;
-import ace.pinduoduo.define.base.request.PddWeappQrcodeUrlGenRequest;
-import ace.pinduoduo.define.base.response.PddGoodsPidQueryResponse;
-import ace.pinduoduo.define.base.response.PddGoodsPromotionUrlGenerateResponse;
-import ace.pinduoduo.define.base.response.PddPidGenerateResponse;
-import ace.pinduoduo.define.base.response.PddWeappQrcodeUrlGenResponse;
+import ace.pinduoduo.define.base.request.*;
+import ace.pinduoduo.define.base.response.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,4 +58,13 @@ public interface PddAdBaseController extends PddAdBaseService {
     @ApiOperation(value = "推广链接生成")
     @RequestMapping(path = "/promotion-url-generate", method = RequestMethod.POST)
     GenericResponseExt<PddGoodsPromotionUrlGenerateResponse> promotionUrlGenerate(@Valid @RequestBody PddGoodsPromotionUrlGenerateRequest request);
+
+    /**
+     * 频道推广
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "频道推广")
+    @RequestMapping(path = "/resource-url-gen", method = RequestMethod.POST)
+    GenericResponseExt<PddResourceUrlGenResponse> resourceUrlGen(@Valid @RequestBody PddResourceUrlGenRequest request);
 }
