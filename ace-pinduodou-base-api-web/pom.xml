@@ -19,10 +19,10 @@
 <!--            <groupId>org.ace</groupId>-->
 <!--            <artifactId>ace-fw-restful-base-api-web</artifactId>-->
 <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.ace</groupId>-->
-<!--            <artifactId>ace-fw-restful-base-api-web-mybatis-plus-autoconfigure</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.ace</groupId>
+            <artifactId>ace-fw-restful-base-api-web-mybatis-plus-autoconfigure</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.ace</groupId>
             <artifactId>ace-fw-ms-application</artifactId>
