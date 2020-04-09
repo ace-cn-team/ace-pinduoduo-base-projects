@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PddOrdersDbServiceImpl
-        extends TestMybatisPlusDbServiceImpl<PddOrdersMapper,PddOrders>
+        extends MybatisPlusDbServiceImpl<PddOrders,PddOrdersMapper>
         implements PddOrdersDbService {
 }

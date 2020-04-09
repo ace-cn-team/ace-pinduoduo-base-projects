@@ -21,7 +21,11 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel
-public class PddOrdersLocalPageRequest extends PageQueryRequest {
+public class PddOrdersLocalPageRequest{
+
+    private Integer pageIndex = 0;
+
+    private Integer pageSize = 10;
 
     @ApiModelProperty(required = true, value = "账号id")
     @NotEmpty(message = "accountId不能为空")
