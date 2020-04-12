@@ -27,12 +27,13 @@ CREATE TABLE `pdd_orders` (
   `order_receive_time` bigint(20) DEFAULT NULL,
   `group_id` bigint(20) DEFAULT NULL,
   `fail_reason` varchar(255) DEFAULT NULL,
-  `order_id` varchar(50) DEFAULT NULL,
+  `order_id` varchar(50) NOT NULL,
   `zs_duo_id` bigint(20) DEFAULT NULL,
-  `update_time` datetime NOT NULL,
-  `create_time` datetime NOT NULL,
-  `row_version` bigint(20) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `row_version` bigint(20) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_order_id` (`order_id`) USING BTREE,
   KEY `idx_account_id` (`account_id`),
   KEY `idx_create_time` (`create_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

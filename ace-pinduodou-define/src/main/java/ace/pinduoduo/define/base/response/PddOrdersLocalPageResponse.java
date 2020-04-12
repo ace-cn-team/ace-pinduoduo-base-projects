@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @ApiModel
 @Data
-public class PddOrderLocalPageResponse {
+public class PddOrdersLocalPageResponse {
 
     @ApiModelProperty(value = "推广订单编号")
     private String orderSn;
